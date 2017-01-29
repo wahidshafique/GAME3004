@@ -15,6 +15,7 @@ class Dictionary {
         "word2" : "test2",
         "word3" : "test3"
     ]
+    
     func getWord(userWord: String) -> Bool{
         if (self.dict.count > 0) {
             let index: Int = Int(arc4random_uniform(UInt32(self.dict.count)))
@@ -24,13 +25,14 @@ class Dictionary {
             let userGuess:String? = readLine()
             if let i = self.dict.removeValue(forKey: key) {
                 print ("The value \(i) was removed.")
-                if (userGuess == key) {
+                if (userGuess?.lowercased() == key) {
                     print ("correct")
-                    return true
+
                 } else {
                     print("wrong")
                 }
             }
+            return true
         }
         return false
     }

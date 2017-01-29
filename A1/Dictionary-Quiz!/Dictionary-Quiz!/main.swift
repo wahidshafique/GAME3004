@@ -17,8 +17,12 @@ func input() {
     var answer:String? = readLine()
     answer = answer?.lowercased()
     if  (answer == "yes") {
-        _ = defWord()
-        print ("Play again? ", terminator:"")
+        if (defWord()) {
+            print ("Play again? ", terminator:"")
+        } else {
+            print ("Out of words!")
+            game = false
+        }
     } else if (answer == "no"){
         print("bad")
         game = false;
