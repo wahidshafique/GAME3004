@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class Dictionary {
     public var dict: [String:String] = [
         "word" : "test",
@@ -22,14 +21,13 @@ class Dictionary {
             let key: String = Array(self.dict.keys)[index]
             let value: String = Array(self.dict.values)[index]
             print(value)
+            print ("Word: ", terminator:"")
             let userGuess:String? = readLine()
-            if let i = self.dict.removeValue(forKey: key) {
-                print ("The value \(i) was removed.")
+            if self.dict.removeValue(forKey: key) != nil {
                 if (userGuess?.lowercased() == key) {
-                    print ("correct")
-
+                    print ("Correct! " + randomEmoji(emotion: "happy"))
                 } else {
-                    print("wrong")
+                    print("Wrong! " + randomEmoji(emotion: "sad"))
                 }
             }
             return true

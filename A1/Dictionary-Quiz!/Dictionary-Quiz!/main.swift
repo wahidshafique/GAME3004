@@ -8,7 +8,22 @@
 
 import Foundation
 
-print("Hello, World!")
+func randomEmoji(emotion: String)->String{
+    //just for fun :)
+    let emojiStart = 0x1F601
+    var ascii:Int = 0
+    if (emotion == "happy") {
+    ascii = emojiStart + Int(arc4random_uniform(UInt32(11)))
+    } else if (emotion == "sad") {
+        ascii = emojiStart + Int(arc4random_uniform(UInt32(19)) + 35)
+    }
+    let emoji = UnicodeScalar(ascii)?.description
+    return emoji ?? "x"
+}
+
+print("sad emoji: " + randomEmoji(emotion: "sad"))
+print("happy emoji: " + randomEmoji(emotion: "happy"))
+print("Hi! I'll give you a definition of a word, and you have to guess the word! Would you like to play? ")
 
 var dictionary = Dictionary()
 var game:Bool = true;
