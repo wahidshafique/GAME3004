@@ -5,7 +5,6 @@
 //  Created by Tech on 2017-01-28.
 //  Copyright © 2017 Tech. All rights reserved.
 //
-
 import Foundation
 
 class Dictionary {
@@ -26,6 +25,7 @@ class Dictionary {
             if self.dict.removeValue(forKey: key) != nil {
                 if (userGuess?.lowercased() == key) {
                     print ("Correct! " + randomEmoji(emotion: "happy"))
+                    score += 1
                 } else {
                     print("Wrong! " + randomEmoji(emotion: "sad"))
                 }

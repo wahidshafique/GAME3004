@@ -8,42 +8,56 @@
 
 import Foundation
 
-func randomEmoji(emotion: String)->String{
-    //just for fun :)
-    let emojiStart = 0x1F601
-    var ascii:Int = 0
-    if (emotion == "happy") {
-    ascii = emojiStart + Int(arc4random_uniform(UInt32(11)))
-    } else if (emotion == "sad") {
-        ascii = emojiStart + Int(arc4random_uniform(UInt32(19)) + 35)
-    }
-    let emoji = UnicodeScalar(ascii)?.description
-    return emoji ?? "x"
-}
-
-print("sad emoji: " + randomEmoji(emotion: "sad"))
-print("happy emoji: " + randomEmoji(emotion: "happy"))
-print("Hi! I'll give you a definition of a word, and you have to guess the word! Would you like to play? ")
+print("Hi! I'll give you a definition of a word, and you have to guess the word! Would you like to play? (yes or no) ")
 
 var dictionary = Dictionary()
 var game:Bool = true;
+var score:Int = 0;
+
 
 func input() {
     var answer:String? = readLine()
     answer = answer?.lowercased()
     if  (answer == "yes") {
         if (defWord()) {
+            myScore()
             print ("Play again? ", terminator:"")
         } else {
             print ("Out of words!")
             game = false
         }
-    } else if (answer == "no"){
-        print("bad")
+    } else if (answer == "no") {
         game = false;
     } else {
         print("Input not recognized")
     }
+}
+
+func scoreReader() ->String {
+    let file = "hs.txt"
+    var highScore:String = "0"
+    
+    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        let path = dir.appendingPathComponent(file)
+        
+        do {
+            highScore = try String(contentsOf: path, encoding: String.Encoding.utf8)
+        }
+        catch {print("You set the very first highscore!")}
+        
+        do {
+            if let hsInt = Int(highScore) {
+                if (score > hsInt) {
+                    try String(score).write(to: path, atomically: false, encoding: String.Encoding.utf8)
+                    return String(score)
+                }
+            }
+        }
+        catch {print("Error, highscore could not be written")}
+    } else {
+        print("Directory error, cannot get highscore")
+    }
+    return highScore
 }
 
 func defWord() -> Bool{
@@ -51,8 +65,27 @@ func defWord() -> Bool{
     return (dictionary.getWord(userWord: "hi"))
 }
 
-while (game){
-    input()
+func myScore() {
+    print("Your current score is: " + String(score))
+    if (!game){
+        print("The high score is: " + scoreReader())
+    }
 }
 
+func randomEmoji(emotion: String)->String{
+    let emojiStart = 0x1F601
+    var ascii:Int = 0
+    if (emotion == "happy") {
+        ascii = emojiStart + Int(arc4random_uniform(UInt32(11)))
+    } else if (emotion == "sad") {
+        ascii = emojiStart + Int(arc4random_uniform(UInt32(19)) + 35)
+    }
+    let emoji = UnicodeScalar(ascii)?.description
+    return emoji ?? "x"
+}
+
+while (game) {
+    input()
+}
+myScore()
 print("Thanks for playing!")
