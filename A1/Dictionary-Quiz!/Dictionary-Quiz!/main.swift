@@ -8,17 +8,16 @@
 
 import Foundation
 
-print("Hi! I'll give you a definition of a word, and you have to guess the word! Would you like to play? (yes or no) ")
+print("Hi! I'll give you a definition of a word, and you have to guess the word! Would you like to play? (y/es or n/o) ")
 
 var dictionary = Dictionary()
 var game:Bool = true;
 var score:Int = 0;
 
-
 func input() {
     var answer:String? = readLine()
     answer = answer?.lowercased()
-    if  (answer == "yes") {
+    if  (answer == "yes" || answer == "y") {
         if (defWord()) {
             myScore()
             print ("Play again? ", terminator:"")
@@ -26,7 +25,7 @@ func input() {
             print ("Out of words!")
             game = false
         }
-    } else if (answer == "no") {
+    } else if (answer == "no" || answer == "n") {
         game = false;
     } else {
         print("Input not recognized")

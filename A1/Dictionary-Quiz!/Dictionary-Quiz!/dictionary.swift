@@ -9,6 +9,7 @@ import Foundation
 
 class Dictionary {
     public var dict: [String:String] = [
+        //generated from http://wahid.co/dict/
         "calibrate" : "to check or slightly change an instrument or tool so that it does something correctly",
         
         "diaper" : "to put a diaper on a baby",
@@ -19,15 +20,9 @@ class Dictionary {
         
         "nautical" : "relating to ships or sailing",
         
-        "dunderhead" : "someone who is stupid",
-        
-        "languid" : "a languid movement or activity is slow or lazy and involves very little energy or activity",
-        
         "clench" : "to close your hands or your mouth tightly, especially because you are angry",
         
         "eclectic" : "including a mixture of many different things or people, especially so that you can use the best of all of them",
-        
-        "phenology" : "the scientific study of the relationship between weather patterns at different times of year and natural events that happen every year or regularly, such as birds migrating or the appearance of flowers on plants",
         
         "melancholy" : "sad or making you feel sad",
         
@@ -53,11 +48,7 @@ class Dictionary {
         
         "there" : "in or to that place",
         
-        "Hebraic" : "relating to the Hebrew language or people",
-        
         "drawer" : "part of a piece of furniture, such as a desk, that you pull out and push in and use to keep things in",
-        
-        "ration" : "to limit the amount of something that people are allowed to have because there is not very much available",
         
         "ration" : "to limit the amount of something that people are allowed to have because there is not very much available",
         
@@ -68,10 +59,6 @@ class Dictionary {
         "libel" : "the crime of writing or printing an untrue statement about someone, with the result that other people are likely to have a bad opinion of him or her",
         
         "disease" : "an illness which affects people, animals, or plants",
-        
-        "dextrous" : "another spelling of dexterous",
-        
-        "stam" : "stem of a tree",
         
         "foremost" : "most famous or important",
         
@@ -85,10 +72,6 @@ class Dictionary {
         
         "restricted" : "limited or controlled, especially by laws or rules",
         
-        "painter" : "iem. wat huise/ens. verf",
-        
-        "florid" : "having too much decoration or detail",
-        
         "irreparably" : "if something is damaged or harmed irreparably, it cannot be repaired or fixed",
         
         "gourd" : "a round fruit with a hard outer shell that is sometimes used as a container. Some gourds can be cooked and eaten",
@@ -97,7 +80,7 @@ class Dictionary {
         
         "paranoia" : "when you wrongly think that everyone is against you or wants to hurt you",
         
-        "strove" : "the past tense of strive",
+        "Latvian" : "someone from Latvia",
         
         "quit" : "to leave a place or job permanently",
         
@@ -111,15 +94,9 @@ class Dictionary {
         
         "unknown" : "not known about",
         
-        "sullen" : "sulky",
-        
-        "demagogy" : "using speeches to make people feel strong emotions, in order to influence their opinions",
-        
-        "appropriate" : "to take something for yourself, when you have no right to do this",
+        "stomach" : "the organ inside your body where food is digested",
         
         "disgrace" : "to do something so bad that people lose respect for you, your family, or your group",
-        
-        "ineradicable" : "an ineradicable fact, quality, or situation is permanent and cannot be changed",
         
         "persuasion" : "the act or skill of persuading someone to do something or believe something",
         
@@ -127,13 +104,11 @@ class Dictionary {
         
         "man" : "to be in charge of a machine or a place",
         
-        "curlicue" : "a decorative twisted pattern",
-        
         "program" : "to set a machine to operate in a particular way",
         
-        "nitty-gritty" : "the basic and practical facts of a subject or activity",
+        "Roman" : "related to ancient Rome",
         
-        "catchall" : "a drawer, cupboard, etc. where you put any small objects",
+        "'twas" : "a short form of “it was”",
         
         "foster" : "the person or people who foster a child",
         
@@ -145,7 +120,7 @@ class Dictionary {
         
         "fire" : "to shoot bullets from a gun",
         
-        "eschew" : "to deliberately avoid doing, using, or having something",
+        "sacrament" : "the bread and wine that are eaten at communion1an important Christian ceremony",
         
         "suffrage" : "the right to vote in national elections",
         
@@ -161,7 +136,7 @@ class Dictionary {
         
         "simultaneous" : "happening or done at exactly the same time",
         
-        "huis" : "where you live",
+        "house" : "where you live",
         
         "enticing" : "very pleasant or interesting so that you feel strongly attracted",
         
@@ -170,10 +145,6 @@ class Dictionary {
         "appendicitis" : "an illness in which your appendix swells and causes pain",
         
         "tit" : "a woman's breast",
-        
-        "presently" : "binnekort",
-        
-        "infantile" : "infantile behavior seems silly in an adult because it is typical of a child",
         
         "aviation" : "the activity of flying in planes, or making planes",
         
@@ -205,24 +176,23 @@ class Dictionary {
         
         "unused" : "not experienced in dealing with something",
         
-        "abstention" : "a vote in an election which is neither for nor against something or someone",
-        
         "cologne" : "a liquid that smells like flowers or plants, which you put on your neck or wrists",
         
-        "beton" : "substance used for building",
-        
-        "epidemic" : "siekte wat vinnig versprei",
-        
         "unobserved" : "without being seen",
-        
-        "firetrap" : "a building that would be very difficult to escape from if a fire started there",
         
         "stumble" : "to almost fall",
         
         "incomplete" : "not having all its parts",
         
-        "posy" : "a small bunch of cut flowers that you hold together"
+        "bullet" : "a small piece of metal that is fired from a gun",
         
+        "granddaughter" : "the daughter of your son or daughter",
+        
+        "disturbing" : "worrying or upsetting",
+        
+        "peacock" : "a large bird. The male has long blue and green tail feathers that it can lift and spread out.",
+        
+        "fetish" : "a desire for sex that comes from seeing a particular type of object or doing a particular activity",
     ]
     
     func getWord(userWord: String) -> Bool{
@@ -234,11 +204,12 @@ class Dictionary {
             print ("Word: ", terminator:"")
             let userGuess:String? = readLine()
             if self.dict.removeValue(forKey: key) != nil {
-                if (userGuess?.lowercased() == key) {
+                if (userGuess?.lowercased() == key.lowercased()) {
                     print ("Correct! " + randomEmoji(emotion: "happy"))
                     score += 1
                 } else {
                     print("Wrong! " + randomEmoji(emotion: "sad"))
+                    print ("The word was: " + key)
                 }
             }
             return true
