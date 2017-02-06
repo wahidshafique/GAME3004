@@ -51,9 +51,9 @@ class GameScene: SKScene {
             spinnyNode.lineWidth = 5
             
             spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
-            //            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-            //                                              SKAction.fadeOut(withDuration: 0.5),
-            //                                              SKAction.removeFromParent()]))
+                        spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
+                                                          SKAction.fadeOut(withDuration: 0.5),
+                                                          SKAction.removeFromParent()]))
         }
         
         
@@ -107,20 +107,20 @@ class GameScene: SKScene {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
-    var n = 0.0
+    var num = 0
     var c = 12.0
-    var angleNum = 137.5
+    var angleNum: Double = 137.5
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        var angle = n * angleNum
-        var radius = c * sqrt(n)
+        var angle = Double(num) * angleNum
+        var radius = c * sqrt(Double(num))
         var x = radius * cos(angle) + 10.0
         var y = radius * sin(angle) + 10.0
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = CGPoint(x:x, y:y)
-            n.strokeColor = SKColor.init(hue: 255.0, saturation: 255.0, brightness: 255.0, alpha: 1.0)
+            n.strokeColor = SKColor.init(red: CGFloat((num % 256)) / 255.0, green: CGFloat((2 * num % 256)) / 255.0, blue: CGFloat((3 * num % 256)) / 255.0, alpha: 1)
             self.addChild(n)
         }
-        n+=1
+        num+=1
     }
 }
