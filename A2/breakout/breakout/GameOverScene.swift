@@ -25,10 +25,10 @@ class GameOverScene: SKScene {
         hint.position = CGPoint(x: self.size.width / 2, y: self.size.height / 3)
         hint.text = "Touch to return"
         
-        
-        let randomThing = randomParser()
+        //NOTE: was trying to connect to an api...will try again later
+        //let randomThing = randomParser()
 
-        self.addChild(randomThing)
+        //self.addChild(randomThing)
         self.addChild(hint)
         self.addChild(overLabel)
         
@@ -85,22 +85,39 @@ class GameOverScene: SKScene {
     }
     
     func workWithScore(mScore: Int)->String{
+        let url = URL(string: String(format:"http://www/numbersapi.com/", mScore))
+        
         //seeing if this works...
-        let url = URL(string: "http://www/numbersapi.com/" + String(mScore))
-        let task = URLSession.shared.dataTask(with: url!) { data, response, error in
-            guard error == nil else {
-                print(error!)
+        makeRequest(request: URLRequest(url: url!)) {response in //<-`response` is inferred as `String`, with the code above.
+            print(response)
+            }
+        return "foo"
+    }
+    
+    func makeRequest(request: URLRequest, completion: @escaping (String)->Void) {
+        let task = URLSession.shared.dataTask(with: request) {data, response, error in
+            guard let data = data, error == nil else{
+                print("error=\(error)")
                 return
             }
-            guard let data = data else {
-                print("Data is empty")
-                return
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
             }
-            let res = try! JSONSerialization.jsonObject(with: data, options: [])
-            print(res)
+            print(data as NSData) //<-`as NSData` is useful for debugging
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                print(json)
+                //Why don't you use decoded JSON object? (`json` may not be a `String`)
+            } catch {
+                print("error serializing JSON: \(error)")
+            }
+            //Not sure what you mean with "i need to return the json as String"
+            let responseString = String(data: data, encoding: .utf8) ?? ""
+            completion(responseString)
         }
         task.resume()
-        return "fuck"
     }
 }
 

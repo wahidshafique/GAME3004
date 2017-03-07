@@ -19,6 +19,9 @@ struct PhysicsCategory {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     private var scorerMan : Scorer?
+    //why an array? I wanted to do something with the/
+    //objs, such as form them into a pattern or have various / 
+    //effects act upon each one TODO:
     private var bricks : [Brick] = []
     private let paddleSpeed = CGFloat(15)
     private var label : SKLabelNode?
@@ -38,9 +41,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //make the entities
         self.physicsWorld.contactDelegate = self
-        let playBall = Ball(scene: self, radius: 10)
+        _ = Ball(scene: self, radius: 10)
         playPaddle = Paddle(scene: self, sizeX: 60, sizeY: 25)
-        makeBrickGrid(cols: 1, rows: 1)
+        makeBrickGrid(cols: 10, rows: 10)
         worldStuff()
     }
     

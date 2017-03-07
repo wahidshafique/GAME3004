@@ -8,7 +8,7 @@ class GameViewController: UIViewController {
         let skView = self.view as! SKView?
         if skView?.scene == nil {
             //skView?.showsFPS = true
-            skView?.showsNodeCount = true
+            //skView?.showsNodeCount = true
             //GameScene.setScale(.asp)
             let game_Scene = MainSceneScreen(size: (skView?.bounds.size)!)
             game_Scene.scaleMode = .aspectFill
