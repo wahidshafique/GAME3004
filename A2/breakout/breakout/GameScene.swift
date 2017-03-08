@@ -93,6 +93,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //game over! you get one chance :) 😄
             print("contact between ball and bottom")
             let gameoverScene = GameOverScene(size: self.frame.size, didYouWin: false)
+            gameoverScene.workWithScore(mScore: (scorerMan?.getCurrentScore())!)
             self.view?.presentScene(gameoverScene)
         }
         if collision == PhysicsCategory.Ball | PhysicsCategory.Brick {
